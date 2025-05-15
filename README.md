@@ -1,8 +1,8 @@
 
-````markdown
+
 # 📝 Task Manager App
 
-A simple yet powerful Flutter app for managing tasks efficiently. Includes support for categories, due dates, priorities, and themes. Built with clean architecture principles using BLoC for state management and SQLite for local persistence.
+A simple yet powerful Flutter app for managing tasks efficiently. Includes support for categories, due dates, priorities, and themes.
 
 ---
 
@@ -13,7 +13,7 @@ A simple yet powerful Flutter app for managing tasks efficiently. Includes suppo
 ```bash
 git clone https://github.com/Kunalsalankar/tasks.git
 cd tasks
-````
+```
 
 ### 2. Install dependencies
 
@@ -120,7 +120,6 @@ flutter test
 ```
 
 
-
 ---
 
 ## 📦 Packages Used
@@ -149,6 +148,3 @@ This project is open-source and available under the MIT License.
 ---
 
 
-
-I can help you enhance it further!
-```
