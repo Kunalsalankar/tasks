@@ -98,7 +98,7 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
     final isDarkMode = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
+      backgroundColor: isDarkMode ? Color(0xFF121212) : theme.scaffoldBackgroundColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
@@ -108,9 +108,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: isDarkMode
-                  ? theme.cardColor.withOpacity(0.9)
+                  ? Colors.black.withOpacity(0.5)
                   : Colors.white.withOpacity(0.9),
               shape: BoxShape.circle,
+              border: isDarkMode
+                  ? Border.all(color: Colors.grey[800]!)
+                  : null,
             ),
             child: Icon(Icons.arrow_back_ios_new, color: theme.primaryColor, size: 18),
           ),
@@ -122,9 +125,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDarkMode
-                    ? theme.cardColor.withOpacity(0.9)
+                    ? Colors.black.withOpacity(0.5)
                     : Colors.white.withOpacity(0.9),
                 shape: BoxShape.circle,
+                border: isDarkMode
+                    ? Border.all(color: Colors.grey[800]!)
+                    : null,
               ),
               child: Icon(Icons.edit_outlined, color: theme.primaryColor, size: 18),
             ),
@@ -145,9 +151,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDarkMode
-                    ? theme.cardColor.withOpacity(0.9)
+                    ? Colors.black.withOpacity(0.5)
                     : Colors.white.withOpacity(0.9),
                 shape: BoxShape.circle,
+                border: isDarkMode
+                    ? Border.all(color: Colors.grey[800]!)
+                    : null,
               ),
               child: const Icon(Icons.delete_outline, color: Colors.redAccent, size: 18),
             ),
@@ -221,9 +230,20 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
   Widget _buildTaskDetail(Task task, ThemeData theme) {
     final dateFormat = DateFormat('MMM dd, yyyy - HH:mm');
     final isDarkMode = theme.brightness == Brightness.dark;
-    final cardColor = isDarkMode ? theme.cardColor : Colors.white;
-    final textColor = isDarkMode ? theme.textTheme.bodyLarge?.color : Colors.black87;
-    final secondaryTextColor = isDarkMode ? theme.textTheme.bodyMedium?.color : Colors.grey[600];
+
+    // Enhanced dark mode colors
+    final cardColor = isDarkMode
+        ? Color(0xFF2C2C2E) // Dark gray for cards in dark mode
+        : Colors.white;
+    final textColor = isDarkMode
+        ? Colors.white
+        : Colors.black87;
+    final secondaryTextColor = isDarkMode
+        ? Colors.grey[400]
+        : Colors.grey[600];
+    final cardBorderColor = isDarkMode
+        ? Colors.grey[800]
+        : Colors.transparent;
 
     return FadeTransition(
       opacity: _fadeAnimation,
@@ -237,8 +257,8 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    _getPriorityColor(task.priority).withOpacity(0.8),
-                    _getPriorityColor(task.priority).withOpacity(0.4),
+                    _getPriorityColor(task.priority),
+                    _getPriorityColor(task.priority).withOpacity(0.7),
                   ],
                 ),
                 borderRadius: const BorderRadius.only(
@@ -260,9 +280,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: isDarkMode
-                                  ? theme.cardColor.withOpacity(0.9)
+                                  ? Colors.black.withOpacity(0.5)
                                   : Colors.white.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(20),
+                              border: isDarkMode
+                                  ? Border.all(color: Colors.grey[800]!)
+                                  : null,
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -288,9 +311,12 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: isDarkMode
-                                  ? theme.cardColor.withOpacity(0.9)
+                                  ? Colors.black.withOpacity(0.5)
                                   : Colors.white.withOpacity(0.9),
                               borderRadius: BorderRadius.circular(20),
+                              border: isDarkMode
+                                  ? Border.all(color: Colors.grey[800]!)
+                                  : null,
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -319,15 +345,15 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
                           task.title,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
                               Shadow(
                                 offset: Offset(0, 1),
-                                blurRadius: 2,
-                                color: Color.fromRGBO(0, 0, 0, 0.3),
+                                blurRadius: 3,
+                                color: Colors.black.withOpacity(0.4),
                               ),
                             ],
                           ),
@@ -342,37 +368,49 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
 
           // Body content
           SliverToBoxAdapter(
-            child: Padding(
+            child: Container(
+              color: isDarkMode ? Color(0xFF121212) : theme.scaffoldBackgroundColor,
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Time indicator
-                  Row(
-                    children: [
-                      Icon(Icons.access_time, size: 18, color: secondaryTextColor),
-                      const SizedBox(width: 8),
-                      Text(
-                        _getTimeRemainingText(task.createdDate),
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: secondaryTextColor,
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? Colors.black38 : Colors.grey[200],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.access_time, size: 18, color: secondaryTextColor),
+                        const SizedBox(width: 8),
+                        Text(
+                          _getTimeRemainingText(task.createdDate),
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: secondaryTextColor,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
 
                   // Description section
                   Container(
                     decoration: BoxDecoration(
                       color: cardColor,
                       borderRadius: BorderRadius.circular(16),
+                      border: isDarkMode
+                          ? Border.all(color: cardBorderColor!)
+                          : null,
                       boxShadow: [
                         BoxShadow(
                           color: isDarkMode
-                              ? Colors.black.withOpacity(0.2)
+                              ? Colors.black.withOpacity(0.3)
                               : Colors.black.withOpacity(0.05),
                           offset: const Offset(0, 4),
                           blurRadius: 10,
@@ -421,10 +459,13 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> with SingleTickerPr
                     decoration: BoxDecoration(
                       color: cardColor,
                       borderRadius: BorderRadius.circular(16),
+                      border: isDarkMode
+                          ? Border.all(color: cardBorderColor!)
+                          : null,
                       boxShadow: [
                         BoxShadow(
                           color: isDarkMode
-                              ? Colors.black.withOpacity(0.2)
+                              ? Colors.black.withOpacity(0.3)
                               : Colors.black.withOpacity(0.05),
                           offset: const Offset(0, 4),
                           blurRadius: 10,

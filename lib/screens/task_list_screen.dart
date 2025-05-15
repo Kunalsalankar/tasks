@@ -201,14 +201,6 @@ class _TaskListScreenState extends State<TaskListScreen> with SingleTickerProvid
           ),
       
           const Divider(),
-          ListTile(
-            leading: const Icon(Icons.refresh),
-            title: const Text('Refresh Tasks'),
-            onTap: () {
-              Navigator.pop(context);
-              context.read<TaskBloc>().add(FetchTasks());
-            },
-          ),
         ],
       ),
     );
