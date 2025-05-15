@@ -128,7 +128,6 @@ flutter test
 * `sqflite`: For local database
 * `path_provider`: To locate database path
 * `intl`: For date formatting
-* `equatable`: For value comparisons in BLoC
 
 ---
 
