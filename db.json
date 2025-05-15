@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Wake Up Early",
+      "description": "Get ready by 6:30 AM and prepare for college",
+      "isCompleted": 0,
+      "createdDate": "2025-05-14T06:30:00.000Z",
+      "priority": 1
+    },
+    {
+      "id": 2,
+      "title": "Attend Classes",
+      "description": "Attend Flutter & DSA lectures",
+      "isCompleted": 1,
+      "createdDate": "2025-05-14T09:00:00.000Z",
+      "priority": 2
+    },
+    {
+      "id": 3,
+      "title": "Work on Assignment",
+      "description": "Complete API integration and testing",
+      "isCompleted": 0,
+      "createdDate": "2025-05-14T16:00:00.000Z",
+      "priority": 3
+    }
+  ]
+}
