@@ -1,6 +1,3 @@
-Sure! Here's the **updated and final version** of your `README.md` file including **highlighted terminal commands with code blocks**, just like in your screenshot:
-
----
 
 ````markdown
 # 📝 Task Manager App
@@ -12,10 +9,11 @@ A simple yet powerful Flutter app for managing tasks efficiently. Includes suppo
 ## 🚀 Setup Instructions
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Kunalsalankar/tasks.git
 cd tasks
-```
+````
 
 ### 2. Install dependencies
 
@@ -121,12 +119,7 @@ lib/
 flutter test
 ```
 
-> Add your test files under the `test/` directory.
-> Suggested test files:
 
-* `task_model_test.dart`
-* `task_bloc_test.dart`
-* `database_helper_test.dart`
 
 ---
 
@@ -155,12 +148,7 @@ This project is open-source and available under the MIT License.
 
 ---
 
-✅ You can now paste this directly into your `README.md` — it includes all the setup and usage in a clean, well-formatted way.
 
-Let me know if you’d like to include:
-- Screenshots or GIFs
-- Contribution guidelines
-- Feature list
 
-I can help generate those as well!
+I can help you enhance it further!
 ```
