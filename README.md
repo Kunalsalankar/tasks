@@ -12,11 +12,10 @@ A simple yet powerful Flutter app for managing tasks efficiently. Includes suppo
 ## 🚀 Setup Instructions
 
 ### 1. Clone the repository
-
 ```bash
 git clone https://github.com/Kunalsalankar/tasks.git
 cd tasks
-````
+```
 
 ### 2. Install dependencies
 
